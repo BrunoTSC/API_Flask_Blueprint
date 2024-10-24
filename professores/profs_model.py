@@ -1,33 +1,61 @@
-dados = {
-    "professores": [  
-        {"id":1, "nome":"Kleber", "idade":26, "matéria":"DevOps", "observações": None},
-        {"id":2, "nome":"Caio", "idade":24, "matéria":"APIs", "observações": None},
-        {"id":3, "nome":"Beicinho", "idade":28, "matéria":"Lógica de programação", "observações": None},
-        {"id":4, "nome":"Larissa", "idade":25, "matéria":"Soft Skills", "observações": None},
-        ],
-}
+from config import db
+
+class Professor(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(100), nullable=False)
+    idade = db.Column(db.Integer, nullable=False)
+    materia = db.Column(db.String(100), nullable=False)
+    observacoes = db.Column(db.Text, nullable=True)
+
+    def _init_(self, nome, idade, materia, observacoes=None):
+        self.nome = nome
+        self.idade = idade
+        self.materia = materia
+        self.observacoes = observacoes
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'nome': self.nome,
+            'idade': self.idade,
+            'materia': self.materia,
+            'observacoes': self.observacoes
+        }
 
 class ProfessorNaoEncontrado(Exception):
     pass
 
 def professor_por_id(id_professor):
-    lista_professores = dados['professores']
-    for dicionario in lista_professores:
-        if dicionario['id'] == id_professor:
-            return dicionario
-    raise ProfessorNaoEncontrado
+    professor = Professor.query.get(id_professor)
+    if not professor:
+        raise ProfessorNaoEncontrado
+    return professor.to_dict()
 
 def listar_professores():
-    print("Dados carregados:", dados)  
-    return dados['professores']
+    professores = Professor.query.all()
+    return [professor.to_dict() for professor in professores]
 
-def adicionar_professor(professor):
-    dados['professores'].append(professor)
+def adicionar_professor(professor_data):
+    novo_professor = Professor(nome=professor_data['nome'])
+    db.session.add(novo_professor)
+    db.session.commit()
 
 def atualizar_professor(id_professor, novos_dados):
-    professor = professor_por_id(id_professor)
-    professor.update(novos_dados)
+    professor = Professor.query.get(id_professor)
+    if not professor:
+        raise ProfessorNaoEncontrado
+    professor.nome = novos_dados['nome']
+    db.session.commit()
 
 def excluir_professor(id_professor):
-    professor = professor_por_id(id_professor)
-    dados['professores'].remove(professor)
+    professor = Professor.query.get(id_professor)
+    if not professor:
+        raise ProfessorNaoEncontrado
+    db.session.delete(professor)
+    db.session.commit()
+
+
+
+
+
+

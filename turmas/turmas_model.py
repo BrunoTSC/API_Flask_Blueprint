@@ -1,33 +1,55 @@
-dados = {
-    "turmas": [  
-        {"id":1, "descrição":"3A - DevOps", "professor":"Kleber", "ativo": True},
-        {"id":2, "descrição":"3A - APIs", "professor":"Caio", "ativo": True},
-        {"id":3, "descrição":"3A - Lógica de programação", "professor":"Beicinho", "ativo": True},
-        {"id":4, "descrição":"3A - Soft Skills", "professor":"Gustavo", "ativo": True},
-        ],
-}
+from config import db
+from professores.profs_model import Professor
+
+class Turma(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    descricao = db.Column(db.String(100), nullable=False)
+    professor_id = db.Column(db.Integer, db.ForeignKey('professor.id'), nullable=False)
+    ativo = db.Column(db.Boolean, default=True)
+    professor = db.relationship('Professor', backref='turmas')
+
+    def _init_(self, descricao, professor_id, ativo=True):
+        self.descricao = descricao
+        self.professor_id = professor_id
+        self.ativo = ativo
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'descricao': self.descricao,
+            'professor_id': self.professor_id,
+            'ativo': self.ativo
+        }
 
 class TurmaNaoEncontrada(Exception):
     pass
 
+
 def turma_por_id(id_turma):
-    lista_turmas = dados['turmas']
-    for dicionario in lista_turmas:
-        if dicionario['id'] == id_turma:
-            return dicionario
-    raise TurmaNaoEncontrada
+    turma = Turma.query.get(id_turma)
+    if not turma:
+        raise TurmaNaoEncontrada
+    return turma.to_dict()
 
 def listar_turmas():
-    print("Dados carregados:", dados)  
-    return dados['turmas']
+    turmas = Turma.query.all()
+    return [turma.to_dict() for turma in turmas]
 
-def adicionar_turma(turma):
-    dados['turmas'].append(turma)
+def adicionar_turma(turma_data):
+    nova_turma = Turma(nome=turma_data['nome'])
+    db.session.add(nova_turma)
+    db.session.commit()
 
 def atualizar_turma(id_turma, novos_dados):
-    turma = turma_por_id(id_turma)
-    turma.update(novos_dados)
+    turma = Turma.query.get(id_turma)
+    if not turma:
+        raise TurmaNaoEncontrada
+    turma.nome = novos_dados['nome']
+    db.session.commit()
 
 def excluir_turma(id_turma):
-    turma = turma_por_id(id_turma)
-    dados['turmas'].remove(turma)
+    turma = Turma.query.get(id_turma)
+    if not turma:
+        raise TurmaNaoEncontrada
+    db.session.delete(turma)
+    db.session.commit()
