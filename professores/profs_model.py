@@ -1,5 +1,6 @@
 from config import db
 
+
 class Professor(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(100), nullable=False)
@@ -22,8 +23,10 @@ class Professor(db.Model):
             'observacoes': self.observacoes
         }
 
+
 class ProfessorNaoEncontrado(Exception):
     pass
+
 
 def professor_por_id(id_professor):
     professor = Professor.query.get(id_professor)
@@ -31,21 +34,33 @@ def professor_por_id(id_professor):
         raise ProfessorNaoEncontrado
     return professor.to_dict()
 
+
 def listar_professores():
     professores = Professor.query.all()
     return [professor.to_dict() for professor in professores]
 
+
 def adicionar_professor(professor_data):
-    novo_professor = Professor(nome=professor_data['nome'])
+    novo_professor = Professor(
+        nome = professor_data['nome'],
+        idade = professor_data['idade'],
+        materia = professor_data['materia'],
+        observacoes = professor_data['observacoes']
+    )
     db.session.add(novo_professor)
     db.session.commit()
+
 
 def atualizar_professor(id_professor, novos_dados):
     professor = Professor.query.get(id_professor)
     if not professor:
         raise ProfessorNaoEncontrado
     professor.nome = novos_dados['nome']
+    professor.idade = novos_dados['idade']
+    professor.materia = novos_dados['materia']
+    professor.observacoes = novos_dados['observacoes']
     db.session.commit()
+
 
 def excluir_professor(id_professor):
     professor = Professor.query.get(id_professor)
