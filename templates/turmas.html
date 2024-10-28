@@ -1,4 +1,4 @@
-<!-- alunos.html -->
+<!-- turmas.html -->
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
@@ -12,11 +12,14 @@
     <ul>
       {% for turma in turmas %}
       <li>
-        <a href="{{ url_for('turmas.get_turma', id_turma=turma.id) }}">{{ turma.descricao }} (ID: {{ turma.id }})</a>
-        ID: {{ turma.id }}</p>
-        Descricao: {{ turma.descricao }}</p>
-        Professor ID: {{ turma.professor_id }}</p>
-        Ativo: {{ turma.ativo }}</p>
+        <br />
+        <a href="{{ url_for('turmas.get_turma', id_turma=turma.id) }}"
+          >{{ turma.descricao }} (ID: {{ turma.id }})</a
+        ><br />
+        <br />
+        Descricao: {{ turma.descricao }}<br />
+        Professor ID: {{ turma.professor_id }}<br />
+        Ativo: {{ turma.ativo }}<br />
       </li>
       {% endfor %}
     </ul>

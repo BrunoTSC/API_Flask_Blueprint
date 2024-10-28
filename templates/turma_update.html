@@ -9,7 +9,7 @@
   <body>
     <h1>Atualizar Turma</h1>
     <form
-      action="{{ url_for('turmas.update_aluno', id_turma=turma.id) }}"
+      action="{{ url_for('turmas.update_turma', id_turma=turma.id) }}"
       method="POST"
     >
       <!-- Altere o método de envio para PUT -->
@@ -30,14 +30,13 @@
         value="{{ turma.professor_id }}"
       /><br />
 
-      <label for="ativo">ativo:</label>
-      <input
-        type="boolean"
-        id="ativo"
-        name="ativo"
-        value="{{ turma.ativo }}"
-      /><br />
+      <label for="ativo">Ativo:</label>
+      <select id="ativo" name="ativo" value="{{ turma.ativo }}">
+        <option value="true">Sim</option>
+        <option value="false">Não</option>
+      </select>
 
+      <br />
       <button type="submit">Atualizar</button>
     </form>
   </body>

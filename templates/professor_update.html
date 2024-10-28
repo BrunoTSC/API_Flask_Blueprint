@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Atualizar Professor</title>
+  </head>
+
+  <body>
+    <h1>Atualizar Professor</h1>
+    <form
+      action="{{ url_for('professores.update_professor', id_professor=professor.id) }}"
+      method="POST"
+    >
+      <!-- Altere o método de envio para PUT -->
+      <input type="hidden" name="_method" value="PUT" />
+
+      <label for="nome">Nome:</label>
+      <input
+        type="text"
+        id="nome"
+        name="nome"
+        value="{{ professor.nome }}"
+      /><br />
+
+      <label for="idade">Idade:</label>
+      <input
+        type="number"
+        id="idade"
+        name="idade"
+        value="{{ professor.idade }}"
+      /><br />
+
+      <label for="materia">Matéria:</label>
+      <input
+        type="text"
+        id="materia"
+        name="materia"
+        value="{{ professor.materia }}"
+      /><br />
+
+      <label for="observacoes">Observações:</label>
+      <input
+        type="text"
+        id="observacoes"
+        name="observacoes"
+        value="{{ professor.observacoes }}"
+      /><br />
+
+      <button type="submit">Atualizar</button>
+    </form>
+  </body>
+</html>

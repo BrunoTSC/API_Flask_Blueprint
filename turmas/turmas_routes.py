@@ -29,7 +29,7 @@ def adicionar_turma_page():
 def create_turma():
     descricao = request.form['descricao']
     professor_id = request.form['professor_id']
-    ativo = request.form['ativo']
+    ativo = request.form['ativo'] == 'true'
     nova_turma = {
         'descricao': descricao,
         'professor_id': professor_id,
@@ -39,10 +39,10 @@ def create_turma():
     return redirect(url_for('turmas.get_turmas'))
 
 
-@turmas_blueprint.route('/turmas/<int:turma_id>/editar', methods=['GET'])
-def editar_turma_page(turma_id):
+@turmas_blueprint.route('/turmas/<int:id_turma>/editar', methods=['GET'])
+def editar_turma_page(id_turma):
     try:
-        turma = turma_por_id(turma_id)
+        turma = turma_por_id(id_turma)
         return render_template('turma_update.html', turma=turma)
     except TurmaNaoEncontrada:
         return jsonify({'message': 'Turma não encontrada'}), 404
@@ -52,10 +52,10 @@ def editar_turma_page(turma_id):
 def update_turma(id_turma):
     print("Dados recebidos no formulário:", request.form)
     try:
-        turma = turma_por_id(turma_id)
+        turma = turma_por_id(id_turma)
         descricao = request.form['descricao']
         professor_id = request.form['professor_id']
-        ativo = request.form['ativo']
+        ativo = request.form['ativo'] == 'true'
         
         turma['descricao'] = descricao
         turma['professor_id'] = professor_id
@@ -66,7 +66,7 @@ def update_turma(id_turma):
         return jsonify({'message': 'Turma não encontrada'}), 404
 
 
-@turmas_blueprint.route('/turmas/<int:id_turma>', methods=['DELETE'])
+@turmas_blueprint.route('/turmas/delete/<int:id_turma>', methods=['DELETE',"POST"])
 def delete_turma(id_turma):
     try:
         excluir_turma(id_turma)

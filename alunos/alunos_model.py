@@ -5,8 +5,8 @@ class Aluno(db.Model):
     nome = db.Column(db.String(100), nullable=False)
     idade = db.Column(db.Integer, nullable=False)
     turma_id = db.Column(db.Integer, db.ForeignKey('turma.id'), nullable=False)
-    nota_primeiro_semestre = db.Column (db.Float, nullable=True)
-    nota_segundo_semestre = db.Column (db.Float, nullable=True)
+    nota_primeiro_semestre = db.Column (db.Float, nullable=True, default=0.0)
+    nota_segundo_semestre = db.Column (db.Float, nullable=True, default=0.0)
     media_final = db.Column(db.Float, nullable=True, default=None)
     turma = db.relationship('Turma', backref ='alunos')
 
