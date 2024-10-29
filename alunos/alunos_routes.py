@@ -1,15 +1,10 @@
 from flask import Blueprint, request, jsonify,render_template,redirect, url_for
-from .alunos_model import AlunoNaoEncontrado, listar_alunos, aluno_por_id, adicionar_aluno, atualizar_aluno, excluir_aluno
+from .alunos_model import AlunoNaoEncontrado, listar_alunos, aluno_por_id, adicionar_aluno, atualizar_aluno, excluir_aluno, media
 from turmas .turmas_model import Turma
 from config import db
 
 
 alunos_blueprint = Blueprint('alunos', __name__)
-
-
-@alunos_blueprint.route('/', methods=['GET'])
-def getIndex():
-    return "Meu index"
 
 
 ## ROTA PARA TODOS OS ALUNOS
@@ -45,16 +40,6 @@ def create_aluno():
     nota_primeiro_semestre = request.form.get('nota_primeiro_semestre', type=float)
     nota_segundo_semestre = request.form.get('nota_segundo_semestre', type=float)
     
-    # Calcula a média se as notas foram fornecidas
-    media_final = None
-    if nota_primeiro_semestre is not None and nota_segundo_semestre is not None:
-        media_final = (nota_primeiro_semestre + nota_segundo_semestre) / 2
-
-    #Vamos verificar se a turma existe
-    # turma = Turma.query.get(turma_id)
-    # if not turma:
-    #     return jsonify({'message': 'Turma não encontrada'}), 400 #erro http com a mensagem
-
     novo_aluno = {
         'nome': nome,
         'idade': int(idade),
@@ -62,7 +47,7 @@ def create_aluno():
         'data_nascimento': data_nascimento,
         'nota_primeiro_semestre': nota_primeiro_semestre,
         'nota_segundo_semestre': nota_segundo_semestre,
-        'media_final': media_final
+        'media_final': media(nota_primeiro_semestre,nota_segundo_semestre)
     }
     adicionar_aluno(novo_aluno)
     return redirect(url_for('alunos.get_alunos'))
@@ -89,18 +74,7 @@ def update_aluno(id_aluno):
         data_nascimento = request.form['data_nascimento']
         nota_primeiro_semestre = request.form.get('nota_primeiro_semestre', type=float)
         nota_segundo_semestre = request.form.get('nota_segundo_semestre', type=float)
-        
-        # Calcula a média se as notas foram fornecidas
-        media_final = None
-        if nota_primeiro_semestre is not None and nota_segundo_semestre is not None:
-            media_final = (nota_primeiro_semestre + nota_segundo_semestre) / 2
-
-        #Vamos verificar se a turma existe
-        # turma = Turma.query.get(turma_id)
-        # if not turma:
-        #     return jsonify({'message': 'Turma não encontrada'}), 400
-        
-        # Preparando os novos dados para atualizar
+       
         novos_dados = {
             'nome': nome,
             'idade': idade,
@@ -108,7 +82,7 @@ def update_aluno(id_aluno):
             'data_nascimento': data_nascimento,
             'nota_primeiro_semestre': nota_primeiro_semestre,
             'nota_segundo_semestre': nota_segundo_semestre,
-            'media_final': media_final
+            'media_final': media(nota_primeiro_semestre,nota_segundo_semestre)
         }
         
         # Atualizando o aluno com os novos dados
