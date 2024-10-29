@@ -17,7 +17,7 @@
   <p><strong>Data de nascimento:</strong> {{ aluno.data_nascimento }}</p>
   <p><strong>Nota do primeiro semestre:</strong> {{ aluno.nota_primeiro_semestre }}</p>
   <p><strong>Nota do segundo semestre:</strong> {{ aluno.nota_segundo_semestre }}</p>
-  <p><strong>Média Final:</strong> {{ aluno.média_final }}</p>
+  <p><strong>Média Final:</strong> {{ aluno.media_final }}</p>
 
 
   <form id="delete-form" action="{{ url_for('alunos.delete_aluno', id_aluno=aluno.id) }}" method="POST">
