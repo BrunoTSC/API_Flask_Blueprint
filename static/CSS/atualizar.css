@@ -1,0 +1,44 @@
+body {
+    display:flex;
+    flex-direction: column;
+    background-image: url('/static/ImagemCSS/lilas.png'); /* Caminho para a imagem */
+    background-size: cover; /* Faz a imagem cobrir todo o fundo */
+    background-position: center; /* Centraliza a imagem */
+    background-repeat: no-repeat; /* Evita repetição da imagem */
+    height: 100vh;
+    margin: 0;
+    align-items:start;
+  }
+
+  h1 {  
+    color: #f9f4f4;
+}
+
+.atualizar {
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+  
+  ul {
+    list-style-type:none;
+    padding: 50px;
+  }
+
+  li {
+    font-size: 18px;
+    margin-bottom: 13px;
+    border-bottom: 5px solid #ddd;
+    padding-bottom: 10px;
+    line-height: 24px;
+  }
+  
+  a {
+    color:  #0795e1;
+    text-decoration:none;
+  }
+  
+  a:hover {
+    text-decoration:#ddd;
+  }
+  

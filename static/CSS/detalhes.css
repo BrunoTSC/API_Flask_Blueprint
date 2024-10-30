@@ -1,0 +1,50 @@
+body {
+    display:flex;
+    flex-direction: column;
+    background-image: url('/static/ImagemCSS/preto\ e\ ouro.png'); /* Caminho para a imagem */
+    background-size: cover; /* Faz a imagem cobrir todo o fundo */
+    background-position: center; /* Centraliza a imagem */
+    background-repeat: no-repeat; /* Evita repetição da imagem */
+    height: 100vh;
+    margin: 0;
+    align-items:start;
+  }
+
+  h1 {  
+    color: #f3ecec;
+}
+
+.detalhes {
+    display: flex;
+    flex-direction: column;
+    color: white(0, 86%, 47%); /* Adicione cor para maior contraste */
+}
+
+.detalhes p {
+    margin: 5px 0;
+    font-size: 18px;
+    color: #f3ecec;
+}
+  
+  ul {
+    list-style-type:none;
+    padding: 50px;
+  }
+
+  li {
+    font-size: 18px;
+    margin-bottom: 13px;
+    border-bottom: 5px solid #ddd;
+    padding-bottom: 10px;
+    line-height: 24px;
+  }
+  
+  a {
+    color:  #0795e1;
+    text-decoration:none;
+  }
+  
+  a:hover {
+    text-decoration:#ddd;
+  }
+  

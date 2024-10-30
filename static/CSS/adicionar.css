@@ -1,0 +1,47 @@
+body {
+    display:flex;
+    flex-direction: column;
+    background-image: url('/static/ImagemCSS/Papel\ de\ parede\ para\ computador\ astronauta\ galáxia\ preto\ e\ branco.png'); /* Caminho para a imagem */
+    background-size: cover; /* Faz a imagem cobrir todo o fundo */
+    background-position: center; /* Centraliza a imagem */
+    background-repeat: no-repeat; /* Evita repetição da imagem */
+    height: 100vh;
+    margin: 0;
+    align-items:start;
+  }
+
+  h1 {  
+    color: #f3ecec;
+    padding: 10px;
+}
+
+.adicionar {
+    display: center;
+    font-size: 16px;
+    flex-direction: column;
+    color:white; /* Adicione cor para maior contraste */
+    padding: 10px;
+}
+  
+  ul {
+    list-style-type:none;
+    padding: 50px;
+  }
+
+  li {
+    font-size: 18px;
+    margin-bottom: 13px;
+    border-bottom: 5px solid #ddd;
+    padding-bottom: 10px;
+    line-height: 24px;
+  }
+  
+  a {
+    color:  #0795e1;
+    text-decoration:none;
+  }
+  
+  a:hover {
+    text-decoration:#ddd;
+  }
+  

@@ -5,25 +5,29 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Detalhes da Turma</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/detalhes.css')}}"/>
+
   </head>
 
   <body>
-    <h1>Detalhes do Turma</h1>
-    <p><strong>ID:</strong> {{ turma.id }}</p>
-    <p><strong>Descricao:</strong> {{ turma.descricao }}</p>
-    <p><strong>Professor ID:</strong> {{ turma.professor_id }}</p>
-    <p><strong>Ativo:</strong> {{ turma.ativo }}</p>
+    <div class="detalhes">
+      <h1>Detalhes da Turma</h1>
+      <p><strong>ID:</strong> {{ turma.id }}</p>
+      <p><strong>Descricao:</strong> {{ turma.descricao }}</p>
+      <p><strong>Professor ID:</strong> {{ turma.professor_id }}</p>
+      <p><strong>Ativo:</strong> {{ turma.ativo }}</p>
 
-    <form
-      id="delete-form"
-      action="{{ url_for('turmas.delete_turma', id_turma=turma.id) }}"
-      method="POST"
-    >
-      <input type="hidden" name="_method" value="DELETE" />
-      <button type="submit">Excluir Turma</button>
-    </form>
-    <a href="{{ url_for('turmas.get_turmas') }}"
-      >Voltar para a lista de turmas</a
-    >
+      <form
+        id="delete-form"
+        action="{{ url_for('turmas.delete_turma', id_turma=turma.id) }}"
+        method="POST"
+      >
+        <input type="hidden" name="_method" value="DELETE" />
+        <button type="submit">Excluir Turma</button>
+      </form>
+      <a href="{{ url_for('turmas.get_turmas') }}"
+        >Voltar para a lista de turmas</a
+      >
+    </div>
   </body>
 </html>

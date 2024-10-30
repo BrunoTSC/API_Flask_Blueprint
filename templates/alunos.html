@@ -4,25 +4,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lista de Alunos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/listas.css')}}"/>
   </head>
 
   <body>
-    <h1>Lista de Alunos</h1>
-    <ul>
-      {% for aluno in alunos %}
-      <li>
-        <a href="{{ url_for('alunos.get_aluno', id_aluno=aluno.id) }}"
-          >{{ aluno.nome }} (ID: {{ aluno.id }})</a
-        ><br />
-        Nome: {{ aluno.nome }}<br />
-        Idade: {{ aluno.idade }}<br />
-        Turma ID: {{ aluno.turma_id }}<br />
-        Data de Nascimento: {{ aluno.data_nascimento }}<br />
-        Nota Primeiro Semestre: {{ aluno.nota_primeiro_semestre }}<br />
-        Nota Segundo Semestre: {{ aluno.nota_segundo_semestre }}<br />
-        Média Final: {{ aluno.media_final }}
-      </li>
-      {% endfor %}
-    </ul>
+    <div class="lista">
+      <h1>Lista de Alunos:</h1>
+      <ul>
+        {% for aluno in alunos %}
+        <li>
+          <a href="{{ url_for('alunos.get_aluno', id_aluno=aluno.id) }}"
+            >{{ aluno.nome }} (ID: {{ aluno.id }})</a>
+            <br />
+            Nome: {{ aluno.nome }}<br />
+            Idade: {{ aluno.idade }}<br />
+            Turma ID: {{ aluno.turma_id }}<br />
+            Data de Nascimento: {{ aluno.data_nascimento }}<br />
+            Nota Primeiro Semestre: {{ aluno.nota_primeiro_semestre }}<br />
+            Nota Segundo Semestre: {{ aluno.nota_segundo_semestre }}<br />
+            Média Final: {{ aluno.media_final }}
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
   </body>
 </html>

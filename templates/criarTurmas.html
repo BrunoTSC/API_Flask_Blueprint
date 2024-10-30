@@ -5,24 +5,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Adicionar Turma</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/adicionar.css')}}"/>
+
   </head>
 
   <body>
     <h1>Adicionar Turma</h1>
     <form action="{{ url_for('turmas.create_turma') }}" method="post">
-      <label for="descricao">Descricao:</label><br />
-      <input type="text" id="descricao" name="descricao" /><br />
+      <div class="adicionar">
+        <label for="descricao">Descricao:</label><br />
+        <input type="text" id="descricao" name="descricao" /><br />
 
-      <label for="professor_id">Professor Id:</label><br />
-      <input type="number" id="professor_id" name="professor_id" /><br />
+        <label for="professor_id">Professor Id:</label><br />
+        <input type="number" id="professor_id" name="professor_id" /><br />
 
-      <label for="ativo">Ativo:</label><br />
-      <select id="ativo" name="ativo">
-        <option value="true">Sim</option>
-        <option value="false">Não</option>
-      </select>
-
+        <label for="ativo">Ativo:</label><br />
+        <select id="ativo" name="ativo">
+          <option value="true">Sim</option>
+          <option value="false">Não</option>
+        </select>
       <br /><input type="submit" value="Adicionar turma" />
+    </div>
     </form>
   </body>
 </html>
