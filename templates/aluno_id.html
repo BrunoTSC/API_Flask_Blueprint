@@ -20,13 +20,12 @@
     <p><strong>Nota do primeiro semestre:</strong> {{ aluno.nota_primeiro_semestre }}</p>
     <p><strong>Nota do segundo semestre:</strong> {{ aluno.nota_segundo_semestre }}</p>
     <p><strong>Média Final:</strong> {{ aluno.media_final }}</p>
+    <form id="delete-form" action="{{ url_for('alunos.delete_aluno', id_aluno=aluno.id) }}" method="POST">
+      <input type="hidden" name="_method" value="DELETE">
+      <button type="submit">Excluir Aluno</button>
+    </form>
+    <a href="{{ url_for('alunos.get_alunos') }}">Voltar para a lista de alunos</a>
   </div>
-
-  <form id="delete-form" action="{{ url_for('alunos.delete_aluno', id_aluno=aluno.id) }}" method="POST">
-    <input type="hidden" name="_method" value="DELETE">
-    <button type="submit">Excluir Aluno</button>
-  </form>
-  <a href="{{ url_for('alunos.get_alunos') }}">Voltar para a lista de alunos</a>
 </body>
 
 </html>

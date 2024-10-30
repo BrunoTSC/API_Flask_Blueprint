@@ -8,6 +8,7 @@
   </head>
 
   <body>
+    <div class="atualizar">
     <h1>Atualizar Professor</h1>
     <form
       action="{{ url_for('professores.update_professor', id_professor=professor.id) }}"
@@ -15,8 +16,6 @@
     >
       <!-- Altere o método de envio para PUT -->
       <input type="hidden" name="_method" value="PUT" />
-
-      <div class="atualizar">
 
         <label for="nome">Nome:</label>
         <input
@@ -49,8 +48,8 @@
           name="observacoes"
           value="{{ professor.observacoes }}"
         /><br />
+        <button type="submit">Atualizar</button>
       </div>
-      <button type="submit">Atualizar</button>
     </form>
   </body>
 </html>

@@ -8,7 +8,7 @@ class Professor(db.Model):
     materia = db.Column(db.String(100), nullable=False)
     observacoes = db.Column(db.Text, nullable=True, default=None)
 
-    def _init_(self, nome, idade, materia, observacoes=None):
+    def __init__(self, nome, idade, materia, observacoes=None):
         self.nome = nome
         self.idade = idade
         self.materia = materia
@@ -28,8 +28,8 @@ class ProfessorNaoEncontrado(Exception):
     pass
 
 
-def professor_por_id(id_professor):
-    professor = Professor.query.get(id_professor)
+def professor_por_id(professor_id):
+    professor = Professor.query.get(professor_id)
     if not professor:
         raise ProfessorNaoEncontrado
     return professor.to_dict()
@@ -51,8 +51,8 @@ def adicionar_professor(professor_data):
     db.session.commit()
 
 
-def atualizar_professor(id_professor, novos_dados):
-    professor = Professor.query.get(id_professor)
+def atualizar_professor(professor_id, novos_dados):
+    professor = Professor.query.get(professor_id)
     if not professor:
         raise ProfessorNaoEncontrado
     professor.nome = novos_dados['nome']
@@ -62,8 +62,8 @@ def atualizar_professor(id_professor, novos_dados):
     db.session.commit()
 
 
-def excluir_professor(id_professor):
-    professor = Professor.query.get(id_professor)
+def excluir_professor(professor_id):
+    professor = Professor.query.get(professor_id)
     if not professor:
         raise ProfessorNaoEncontrado
     db.session.delete(professor)

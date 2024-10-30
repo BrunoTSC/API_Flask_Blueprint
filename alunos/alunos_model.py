@@ -27,7 +27,7 @@ class Aluno(db.Model):
             'nome': self.nome,
             'idade': self.idade,
             'turma_id': self.turma_id,
-            'data_nascimento': self.data_nascimento.strftime("%d/%m/%Y"),
+            'data_nascimento': self.data_nascimento.strftime("%Y-%m-%d"),
             'nota_primeiro_semestre': self.nota_primeiro_semestre,
             'nota_segundo_semestre': self.nota_segundo_semestre,
             'media_final': self.media_final

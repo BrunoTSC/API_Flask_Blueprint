@@ -11,10 +11,6 @@
     align-items: center;
 }
 
-h1 {  
-    color: #f3ecec;
-}
-
 .lista {
     display: flex;
     flex-direction: column;

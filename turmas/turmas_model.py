@@ -1,5 +1,5 @@
 from config import db
-from professores.profs_model import Professor
+from professores.profs_model import Professor 
 
 
 class Turma(db.Model):
@@ -9,7 +9,7 @@ class Turma(db.Model):
     ativo = db.Column(db.Boolean, default=True)
     professor = db.relationship('Professor', backref='turmas')
 
-    def _init_(self, descricao, professor_id, ativo=True):
+    def __init__(self, descricao, professor_id, ativo=True):
         self.descricao = descricao
         self.professor_id = professor_id
         self.ativo = ativo
