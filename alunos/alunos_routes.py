@@ -1,10 +1,10 @@
-from flask import Blueprint, request, jsonify,render_template,redirect, url_for
+from flask import Blueprint, request, jsonify,render_template,redirect, url_for #Importa funções e classes do Flask para criação de rotas e manipulação de requisições.
 from .alunos_model import AlunoNaoEncontrado, listar_alunos, aluno_por_id, adicionar_aluno, atualizar_aluno, excluir_aluno, media
 from turmas .turmas_model import Turma
 from config import db
 
 
-alunos_blueprint = Blueprint('alunos', __name__)
+alunos_blueprint = Blueprint('alunos', __name__) #Define um "blueprint" para as rotas de alunos, permitindo organizar as rotas relacionadas a essa entidade.
 
 
 ## ROTA PARA TODOS OS ALUNOS

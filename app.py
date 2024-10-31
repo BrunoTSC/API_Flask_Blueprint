@@ -4,7 +4,7 @@ from professores.profs_routes import professores_blueprint
 from turmas.turmas_routes import turmas_blueprint
 
 
-app.register_blueprint(alunos_blueprint)
+app.register_blueprint(alunos_blueprint) #para que cada grupo de rotas seja incluído na aplicação principal.
 app.register_blueprint(professores_blueprint)
 app.register_blueprint(turmas_blueprint)
 

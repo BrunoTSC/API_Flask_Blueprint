@@ -6,7 +6,6 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    height: 100vh;
     margin: 0;
     align-items: center;
 }
@@ -16,6 +15,9 @@
     flex-direction: column;
     color: #efebeb; /* Adicione cor para maior contraste */
 }
+  h1 {
+    margin-bottom: -50px;
+  }
   
   ul {
     list-style-type:none;

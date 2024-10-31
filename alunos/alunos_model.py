@@ -1,7 +1,7 @@
-from config import db
-from datetime import datetime
+from config import db #importando a instância do banco de dados db configurada no config.py para ser usada no modelo.
+from datetime import datetime #classe usada para manipular datas
 
-class Aluno(db.Model):
+class Aluno(db.Model): #herdando de db.model o que permite que ela seja tratada como um modelo de SQLAlchemy
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(100), nullable=False)
     idade = db.Column(db.Integer, nullable=False)
@@ -10,9 +10,9 @@ class Aluno(db.Model):
     nota_primeiro_semestre = db.Column(db.Float, nullable=True, default=0.0)
     nota_segundo_semestre = db.Column(db.Float, nullable=True, default=0.0)
     media_final = db.Column(db.Float, nullable=True, default=None)
-    turma = db.relationship('Turma', backref ='alunos')
+    turma = db.relationship('Turma', backref ='alunos') #relacionamento com a tabela Turma, permitindo acessar os alunos da turma.
 
-    def __init__(self, nome, idade, turma_id, data_nascimento, nota_primeiro_semestre, nota_segundo_semestre, media_final):
+    def __init__(self, nome, idade, turma_id, data_nascimento, nota_primeiro_semestre, nota_segundo_semestre, media_final): #Construtor que inicializa os atributos
         self.nome = nome
         self.idade = idade
         self.turma_id = turma_id
@@ -21,7 +21,7 @@ class Aluno(db.Model):
         self.nota_segundo_semestre = nota_segundo_semestre
         self.media_final = media_final
 
-    def to_dict(self):
+    def to_dict(self): #Converte os dados do aluno para um dicionário, facilitando o envio em JSON.
         return {
             'id': self.id,
             'nome': self.nome,
